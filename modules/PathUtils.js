@@ -1,23 +1,61 @@
+/**
+ * 增加'/'到path
+ * @export
+ * @param {any} path 
+ * @returns 
+ */
 export function addLeadingSlash(path) {
   return path.charAt(0) === '/' ? path : '/' + path;
 }
 
+/**
+ * 移除path的根'/'
+ * @export
+ * @param {any} path 
+ * @returns 
+ */
 export function stripLeadingSlash(path) {
   return path.charAt(0) === '/' ? path.substr(1) : path;
 }
 
+/**
+ * 判断path是否是使用baseURL
+ * @export
+ * @param {any} path 
+ * @param {any} prefix 
+ * @returns 
+ */
 export function hasBasename(path, prefix) {
   return new RegExp('^' + prefix + '(\\/|\\?|#|$)', 'i').test(path);
 }
 
+/**
+ * 移除path中的baseURL
+ * @export
+ * @param {any} path 
+ * @param {any} prefix 
+ * @returns 
+ */
 export function stripBasename(path, prefix) {
   return hasBasename(path, prefix) ? path.substr(prefix.length) : path;
 }
 
+/**
+ * 移除path最后的'/'
+ * @export
+ * @param {any} path 
+ * @returns 
+ */
 export function stripTrailingSlash(path) {
   return path.charAt(path.length - 1) === '/' ? path.slice(0, -1) : path;
 }
 
+/**
+ * 将一个path转为location对象形式
+ * @export
+ * @param {any} path 
+ * @returns 
+ */
 export function parsePath(path) {
   let pathname = path || '/';
   let search = '';
@@ -42,6 +80,12 @@ export function parsePath(path) {
   };
 }
 
+/**
+ * 将一个location对象转为path对象
+ * @export
+ * @param {any} location 
+ * @returns 
+ */
 export function createPath(location) {
   const { pathname, search, hash } = location;
 

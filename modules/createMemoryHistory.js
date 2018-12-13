@@ -4,6 +4,7 @@ import { createPath } from './PathUtils';
 import { createLocation } from './LocationUtils';
 import createTransitionManager from './createTransitionManager';
 
+// clamp函数
 function clamp(n, lowerBound, upperBound) {
   return Math.min(Math.max(n, lowerBound), upperBound);
 }
@@ -11,16 +12,24 @@ function clamp(n, lowerBound, upperBound) {
 /**
  * Creates a history object that stores locations in memory.
  */
+/**
+ * 创建内存的history对象
+ * @param {any} [props={}] 
+ * @returns 
+ */
 function createMemoryHistory(props = {}) {
   const {
     getUserConfirmation,
+    // 生成已有的history访问历史
     initialEntries = ['/'],
     initialIndex = 0,
+    // 用于生成随机key
     keyLength = 6
   } = props;
 
   const transitionManager = createTransitionManager();
 
+  // 跳转页面
   function setState(nextState) {
     Object.assign(history, nextState);
     history.length = history.entries.length;
@@ -69,7 +78,9 @@ function createMemoryHistory(props = {}) {
         const prevIndex = history.index;
         const nextIndex = prevIndex + 1;
 
+        // 克隆一个新的访问记录列表
         const nextEntries = history.entries.slice(0);
+        // 清除当前index后面的location记录。将新的记录放入清除后的最后
         if (nextEntries.length > nextIndex) {
           nextEntries.splice(
             nextIndex,
