@@ -4,7 +4,7 @@ export const canUseDOM = !!(
   window.document.createElement
 );
 
-// 对window.confirm对回调，用于window上面没有alert等情况？
+// 用于做刷新提示，beforeunload的event.returnvalue一样
 export function getConfirmation(message, callback) {
   callback(window.confirm(message)); // eslint-disable-line no-alert
 }
@@ -20,7 +20,7 @@ export function getConfirmation(message, callback) {
 export function supportsHistory() {
   const ua = window.navigator.userAgent;
 
-  // 安装2系列不支持。安装2系列和4.0不支持。Mobile Safari中不带Chrome和Windows Phone不支持，难到有safari跑到了按照和winphoe？？？？
+  // 安装2系列不支持。安装2系列和4.0不支持。Mobile Safari中不带Chrome和Windows Phone不支持，难到有safari跑到了按照和winphoe？？？？，如果是修复bug，希望有#xxxx的issue编码
   if (
     (ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) &&
     ua.indexOf('Mobile Safari') !== -1 &&
